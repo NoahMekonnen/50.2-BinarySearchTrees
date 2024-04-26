@@ -131,17 +131,12 @@ class BinarySearchTree {
 
   dfsPreOrder() {
     const arr = []
-    const children = [this.root]
-    while (children.length > 0) {
-      let current = children.pop()
-      arr.push(current.val)
-      if (current.right) {
-        children.push(current.right)
-      }
-      if (current.left) {
-        children.push(current.left)
-      }
+    function dfsPreOrderHelper(node){
+      arr.push(node.val);
+      if (node.left) dfsPreOrderHelper(node.left);
+      if (node.right) dfsPreOrderHelper(node.right);
     }
+    dfsPreOrderHelper(this.root)
     return arr
   }
 
@@ -149,7 +144,6 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   dfsInOrder() {
-    if (!this.root) return undefined
     const arr = []
     function dfsInOrderHelper(node){
       if (node.left) dfsInOrderHelper(node.left);
@@ -164,7 +158,6 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   dfsPostOrder() {
-    if (!this.root) return undefined
     const arr = []
     function dfsPostOrderHelper(node){
       if (node.left) dfsPostOrderHelper(node.left);
@@ -183,12 +176,10 @@ class BinarySearchTree {
     const arr = []
     while (toVisitQueue.length) {
       let current = toVisitQueue.shift();
-      console.log(toVisitQueue)
       arr.push(current.val)
       if (current.left) toVisitQueue.push(current.left)
       if (current.right) toVisitQueue.push(current.right)
     }
-  console.log(arr,"ARR")
     return arr
   }
 
